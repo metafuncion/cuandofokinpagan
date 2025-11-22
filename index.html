@@ -91,26 +91,56 @@
     
     <button id="changeMemeButton">cuando fokin</button>
     <footer>
-        <p>2025 cuando fokin pagan </p>
+        <p>pagan</p>
     </footer>
 <script>
-    const memeImages = [
-        "memes/1.webp",
-        "memes/2.jpg",
-        "memes/3.webp",
-        "memes/4.webp",
-    ];
+    // URL de tu backend en Railway
+    const API_URL = "https://cuandofokinpagan-production.up.railway.app";
     
+    // Variable para guardar la lista de memes
+    let memeImages = [];
+    
+    // Función para obtener los memes desde la API
+    async function fetchMemes() {
+        try {
+            const response = await fetch(`${API_URL}/api/memes`);
+            const data = await response.json();
+            
+            // Guardar los memes con la URL completa del backend
+            memeImages = data.memes.map(meme => `${API_URL}${meme}`);
+            
+            console.log(`✅ Cargados ${data.total} memes desde la API`);
+            
+            // Mostrar el primer meme aleatorio
+            changeMeme();
+        } catch (error) {
+            console.error("❌ Error al cargar memes:", error);
+            // Fallback: Si la API falla, usar memes locales
+            memeImages = [
+                "memes/1.webp",
+                "memes/2.jpg",
+                "memes/3.webp",
+                "memes/4.webp",
+            ];
+            changeMeme();
+        }
+    }
+    
+    // Función para cambiar el meme
     function changeMeme() {
+        if (memeImages.length === 0) {
+            console.log("⏳ Esperando memes...");
+            return;
+        }
         const randomIndex = Math.floor(Math.random() * memeImages.length);
         const selectedMeme = memeImages[randomIndex];
         document.getElementById("meme-image").src = selectedMeme;
     }
     
-    // Initialize on page load
-    changeMeme();
+    // Cargar memes cuando la página carga
+    fetchMemes();
     
-    // Add button event listener
+    // Agregar evento al botón
     document.getElementById("changeMemeButton").addEventListener("click", changeMeme);
 </script>
 </body>
