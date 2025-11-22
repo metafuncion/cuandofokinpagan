@@ -14,7 +14,7 @@ app.use(cors({
     'https://www.cuandofokinpagan.cl',
     'http://www.cuandofokinpagan.cl',
     'https://metafuncion.github.io',
-    'http://localhost:5500'
+    'http://localhost'
   ],
   methods: ['GET']
 }));
