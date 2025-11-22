@@ -36,12 +36,39 @@
             justify-content: center;
             align-items: center;
             margin-bottom: 30px;
+            position: relative;
+            background-color: transparent;
         }
         
         img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+        }
+        
+        img.loaded {
+            opacity: 1;
+        }
+        
+        .loading-spinner {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .loading-spinner.hidden {
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         button {
@@ -80,18 +107,33 @@
             font-size: 12px;
             text-align: center;
         }
+        
+        .suggest-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .suggest-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <h1>cuando fokin pagan</h1>
     
     <div class="meme-container">
+        <div id="loading-spinner" class="loading-spinner"></div>
         <img id="meme-image" src="" alt="Meme aleatorio">
     </div>
     
     <button id="changeMemeButton">cuando fokin</button>
     <footer>
-        <p>pagan</p>
+        <a href="mailto:metafuncion@users.noreply.github.com?subject=Sugerencia de meme&body=Adjunta tu meme aquí" class="suggest-link">añade otro/a>
     </footer>
 <script>
     // URL de tu backend en Railway
@@ -132,9 +174,29 @@
             console.log("⏳ Esperando memes...");
             return;
         }
+        
+        const spinner = document.getElementById("loading-spinner");
+        const img = document.getElementById("meme-image");
+        
+        spinner.classList.remove("hidden");
+        img.classList.remove("loaded");
+    
         const randomIndex = Math.floor(Math.random() * memeImages.length);
         const selectedMeme = memeImages[randomIndex];
-        document.getElementById("meme-image").src = selectedMeme;
+        
+        // Crear nueva imagen para precargar
+        const tempImg = new Image();
+        tempImg.onload = function() {
+            // Cuando termina de cargar, mostrarla
+            img.src = selectedMeme;
+            img.classList.add("loaded");
+            spinner.classList.add("hidden");
+        };
+        tempImg.onerror = function() {
+            console.error("❌ Error cargando meme:", selectedMeme);
+            spinner.classList.add("hidden");
+        };
+        tempImg.src = selectedMeme;
     }
     
     // Cargar memes cuando la página carga
