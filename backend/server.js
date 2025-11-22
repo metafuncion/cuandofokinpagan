@@ -8,7 +8,14 @@ const PORT = process.env.PORT || 3000;
 
 // Configurar CORS para permitir requests desde tu frontend
 app.use(cors({
-  origin: ['https://cuandofokinpagan.cl', 'https://metafuncion.github.io', 'http://localhost:5500'],
+  origin: [
+    'https://cuandofokinpagan.cl',
+    'http://cuandofokinpagan.cl',  // ← Agregado HTTP
+    'https://www.cuandofokinpagan.cl',
+    'http://www.cuandofokinpagan.cl',
+    'https://metafuncion.github.io',
+    'http://localhost:5500'
+  ],
   methods: ['GET']
 }));
 
