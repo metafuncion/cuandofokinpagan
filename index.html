@@ -121,66 +121,45 @@
     
     <button id="changeMemeButton">cuando fokin</button>
 <script>
-    // URL de tu backend en Railway
     const API_URL = "https://cuandofokinpagan-production.up.railway.app";
-    
-    // Variable para guardar la lista de memes
     let memeImages = [];
     
-    // Función para obtener los memes desde la API
     async function fetchMemes() {
         try {
             const response = await fetch(`${API_URL}/api/memes`);
             const data = await response.json();
-            
-            // Guardar los memes con la URL completa del backend
             memeImages = data.memes.map(meme => `${API_URL}${meme}`);
-            
-            console.log(`Cargados ${data.total} memes desde la API`);
-            
-            // Mostrar el primer meme aleatorio
             changeMeme();
         } catch (error) {
-            console.error("Error al cargar memes desde la API:", error);
-            console.log("Reintentando en 3 segundos...");
-            // Reintentar después de 3 segundos
+            console.error("Error loading memes:", error);
             setTimeout(fetchMemes, 3000);
         }
     }
     
-    // Función para cambiar el meme
     function changeMeme() {
-        if (memeImages.length === 0) {
-            console.log("Esperando memes...");
-            return;
-        }
+        if (memeImages.length === 0) return;
         
         const spinner = document.getElementById("loading-spinner");
         const img = document.getElementById("meme-image");
         
         spinner.classList.remove("hidden");
-    
+        
         const randomIndex = Math.floor(Math.random() * memeImages.length);
         const selectedMeme = memeImages[randomIndex];
         
-        // Crear nueva imagen para precargar
         const tempImg = new Image();
         tempImg.onload = function() {
-            // Cuando termina de cargar, mostrarla directamente
             img.src = selectedMeme;
             spinner.classList.add("hidden");
         };
         tempImg.onerror = function() {
-            console.error("Error cargando meme:", selectedMeme);
+            console.error("Error loading image:", selectedMeme);
             spinner.classList.add("hidden");
         };
         tempImg.src = selectedMeme;
     }
     
-    // Cargar memes cuando la página carga
     fetchMemes();
-    
-    // Agregar evento al botón
     document.getElementById("changeMemeButton").addEventListener("click", changeMeme);
 </script>
 </body>
