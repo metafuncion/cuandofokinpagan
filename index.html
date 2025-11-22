@@ -127,6 +127,9 @@
     </div>
     
     <button id="changeMemeButton">cuando fokin</button>
+    <footer>
+        <p> </p>
+    </footer>
 <script>
     // URL de tu backend en Railway
     const API_URL = "https://cuandofokinpagan-production.up.railway.app";
@@ -148,15 +151,10 @@
             // Mostrar el primer meme aleatorio
             changeMeme();
         } catch (error) {
-            console.error("❌ Error al cargar memes:", error);
-            // Fallback: Si la API falla, usar memes locales
-            memeImages = [
-                "memes/1.webp",
-                "memes/2.jpg",
-                "memes/3.webp",
-                "memes/4.webp",
-            ];
-            changeMeme();
+            console.error("❌ Error al cargar memes desde la API:", error);
+            console.log("💡 Reintentando en 3 segundos...");
+            // Reintentar después de 3 segundos
+            setTimeout(fetchMemes, 3000);
         }
     }
     
