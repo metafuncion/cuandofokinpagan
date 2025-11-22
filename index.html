@@ -109,13 +109,6 @@
                 font-size: 16px;
             }
         }
-        footer {
-            margin-top: 20px;
-            padding: 10px;
-            color: #000;
-            font-size: 12px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -127,9 +120,6 @@
     </div>
     
     <button id="changeMemeButton">cuando fokin</button>
-    <footer>
-        <p> </p>
-    </footer>
 <script>
     // URL de tu backend en Railway
     const API_URL = "https://cuandofokinpagan-production.up.railway.app";
@@ -146,13 +136,13 @@
             // Guardar los memes con la URL completa del backend
             memeImages = data.memes.map(meme => `${API_URL}${meme}`);
             
-            console.log(`✅ Cargados ${data.total} memes desde la API`);
+            console.log(`Cargados ${data.total} memes desde la API`);
             
             // Mostrar el primer meme aleatorio
             changeMeme();
         } catch (error) {
-            console.error("❌ Error al cargar memes desde la API:", error);
-            console.log("💡 Reintentando en 3 segundos...");
+            console.error("Error al cargar memes desde la API:", error);
+            console.log("Reintentando en 3 segundos...");
             // Reintentar después de 3 segundos
             setTimeout(fetchMemes, 3000);
         }
@@ -161,7 +151,7 @@
     // Función para cambiar el meme
     function changeMeme() {
         if (memeImages.length === 0) {
-            console.log("⏳ Esperando memes...");
+            console.log("Esperando memes...");
             return;
         }
         
@@ -181,7 +171,7 @@
             spinner.classList.add("hidden");
         };
         tempImg.onerror = function() {
-            console.error("❌ Error cargando meme:", selectedMeme);
+            console.error("Error cargando meme:", selectedMeme);
             spinner.classList.add("hidden");
         };
         tempImg.src = selectedMeme;
