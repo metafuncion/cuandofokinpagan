@@ -1,4 +1,4 @@
-# Cuando Fokin Pagan
+# Cuando fokin pagan
 
 Compilado de memes aleatorios sobre la eterna espera del día de pago.
 
@@ -8,18 +8,7 @@ Compilado de memes aleatorios sobre la eterna espera del día de pago.
 
 ## Features
 
-- Meme aleatorio en cada actualización
-- Responsive (se ve bien en mobile y desktop)
-- Botón para cambiar meme sin recargar
-
----
-
-## Tech Stack
-
-- **HTML5** - Estructura
-- **CSS3** - Estilos
-- **Vanilla JavaScript** - Lógica de memes aleatorios
-- **Netlify** - Hosting y deploy
+- Meme aleatorio cuando actualizas o aprietas el botón
 
 ---
 
@@ -30,7 +19,7 @@ Compilado de memes aleatorios sobre la eterna espera del día de pago.
 git clone https://github.com/metafuncion/cuandofokinpagan.git
 
 # Entrar a la carpeta del proyecto
-cd cuandofokinpagan/proyecto
+cd cuandofokinpagan/
 
 # Abrir index.html en tu navegador
 open index.html
@@ -42,44 +31,30 @@ open index.html
 
 ```
 cuandofokinpagan/
-├── proyecto/
-│   ├── index.html          # Sitio principal
-│   ├── style.css           # (próximamente)
-│   └── script.js           # (próximamente)
-└── 📚-apuntes/             # Apuntes personales de aprendizaje
+├── index.html
+├── favicon.jpg
+└── backend/
+    ├── server.js
+    ├── package.json
+    └── memes/
 ```
+
+---
+
+## Tech Stack
+
+- HTML/CSS/JavaScript
+- Node.js + Express
+- GitHub Pages + Railway
 
 ---
 
 ## Roadmap
 
 - [ ] Agregar más memes
-- [ ] Modo oscuro 🌙
-- [ ] Que me paguen más
-- [ ] Contador de días hasta el próximo día de pago
+- [ ] Modo oscuro
+- [ ] Saber realmente cuándo pagan
 
 ---
 
-## Contributing
-
-¿Tenés un buen meme que no está acá?
-
-1. Verifica que no esté ya en el repo
-2. Fork el proyecto
-3. Crea tu feature branch (`git checkout -b feature/MemeNuevo`)
-4. Commit tus cambios (`git commit -m 'Add: nuevo meme épico'`)
-5. Push al branch (`git push origin feature/MemeNuevo`)
-6. Abre un Pull Request
-
----
-
-## License
-
-MIT License
-
----
-
-## Autor
-
-**Carito** - [GitHub](https://github.com/metafuncion)
-
+Creado por [Carito](https://github.com/metafuncion)
